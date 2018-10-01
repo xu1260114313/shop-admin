@@ -16,7 +16,8 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "md5-node": "^1.0.1",
-    "mongodb": "^3.1.6"
+    "mongodb": "^3.1.6",
+    "multiparty": "^4.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

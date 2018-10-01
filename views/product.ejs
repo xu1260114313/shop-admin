@@ -59,12 +59,16 @@
                     <%for(var i = 0, len = list.length; i < len; i++){%>
                         <tr>
                             <td><%= i + 1%></td>
-                            <td>图标</td>
+                            <td>
+                                <img src="<%= list[i].pic %>" alt="" style="width: 50px;">
+                            </td>
                             <td><%= list[i].title %></td>
                             <td><%= list[i].price %></td>
                             <td><%= list[i].fee %></td>
-                        
-                            <td class="text-center">修改  删除</td>
+                            <td class="text-center">
+                                <a href="/productedit?id=<%= list[i]['_id'] %>" class="btn btn-success">修改</a>
+                                <a href="/productdelete?id=<%= list[i]['_id'] %>" class="btn btn-danger">删除</a>
+                            </td>
                         </tr>
                     <%}%>
                     </tbody>

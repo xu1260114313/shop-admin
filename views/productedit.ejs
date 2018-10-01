@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    
 </head>
 <body>
 <!--The content below is only a placeholder and can be replaced.-->
@@ -35,17 +36,22 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive input-form">
-                        <form action="/doAdd" method="post">
+                        <form action="/doProductEdit" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="_id" value="<%= list['_id'] %>">
                             <ul>
-                                <li>  商品名称: <input type="text" name="title"/></li>
+                                <li>  商品名称: <input type="text" name="title" value="<%= list.title %>"/></li>
 
-                                <li>  商品图片: <input type="file" name="pic"/></li>
-                                <li>  商品价格: <input type="text" name="price"/></li>
-                                <li>  商品邮费: <input type="text" name="fee"/></li>
+                                <li>  商品图片: <input type="file" name="pic"/>
+                                    <div class="row">
+                                        <img src="<%= list.pic %>" alt="" width="100" style="margin-left: 80px;">
+                                    </div>
+                                </li>
+                                <li>  商品价格: <input type="text" name="price" value="<%= list.price %>"/></li>
+                                <li>  商品邮费: <input type="text" name="fee" value="<%= list.fee %>"/></li>
 
                                 <li>
                                     商品描述:
-                                    <textarea name="description" id="" cols="60" rows="8"></textarea>
+                                    <textarea name="description" id="" cols="60" rows="8"><%= list.description %></textarea>
                                 </li>
 
                                 <li>
