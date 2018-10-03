@@ -24,26 +24,33 @@ module.exports = (app, DB) => {
     })
     app.post('/doProductAdd', (req, res) => {
         const uid = req.session.userInfo["_id"];
-        //获取表单数据
-        const form = new multiparty.Form();
-        form.uploadDir = "upload"; //上传的文件夹名称
-        form.parse(req, (err, fields, files) => {
-            const { title, price, fee, description } = fields;
-            const pic = files.pic[0].path;
+        //检测文件夹是否存在，不存在则创建
+        fs.stat(path.join(__dirname, '..', 'upload'), (err, status) => {
+            if (!status) { //目录不存在
+                fs.mkdirSync(path.join(__dirname, '..', 'upload'));
+            };
+            //获取表单数据
+            let form = new multiparty.Form();
+            form.uploadDir = "upload"; //上传的文件夹名称
+            form.parse(req, (err, fields, files) => {
+                const { title, price, fee, description } = fields;
+                const pic = files.pic[0].path;
 
-            DB.insert('product', {
-                uid: DB.ObjectID(uid),
-                title: title[0] || null,
-                price: price[0] || 0,
-                fee: fee[0] || 0,
-                description: description[0] || null,
-                pic: pic
-            }, (err, data) => {
-                if (!err) {
-                    res.redirect('/product'); //上传成功
-                }
+                DB.insert('product', {
+                    uid: DB.ObjectID(uid),
+                    title: title[0] || null,
+                    price: Number(price[0]) || 0,
+                    fee: Number(fee[0]) || 0,
+                    description: description[0] || null,
+                    pic: pic
+                }, (err, data) => {
+                    if (!err) {
+                        res.redirect('/product'); //上传成功
+                    }
+                })
             })
-        })
+        });
+        
     })
 
     //修改商品
@@ -72,16 +79,16 @@ module.exports = (app, DB) => {
                 setOpts = {
                     uid: DB.ObjectID(uid),
                     title: title[0] || null,
-                    price: price[0] || 0,
-                    fee: fee[0] || 0,
+                    price: Number(price[0]) || 0,
+                    fee: Number(fee[0]) || 0,
                     description: description[0] || null,
                     pic: pic
                 };
             } else {
                 setOpts = {
                     title: title[0] || null,
-                    price: price[0] || 0,
-                    fee: fee[0] || 0,
+                    price: Number(price[0]) || 0,
+                    fee: Number(fee[0]) || 0,
                     description: description[0] || null
                 };
 
