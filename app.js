@@ -97,7 +97,7 @@ app.post('/doProductAdd', (req, res) => {
             title: title[0] || null,
             price: price[0] || 0,
             fee: fee[0] || 0,
-            description: fee[0] || null,
+            description: description[0] || null,
             pic: pic
         }, (err, data) => {
             if(!err) {
@@ -162,7 +162,7 @@ app.post('/doProductEdit', (req, res) => {
     })
 })
 
-
+   
 //删除商品
 
 app.get('/logout', (req, res) => {
