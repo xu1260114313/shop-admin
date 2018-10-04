@@ -105,7 +105,6 @@ body{
     text-transform: capitalize;
 }
 .form-horizontal .btn{
-    float: right;
     font-size: 14px;
     color: #fff;
     background: #00b4ef;
@@ -114,6 +113,12 @@ body{
     border: none;
     text-transform: capitalize;
     transition: all 0.5s ease 0s;
+}
+.form-horizontal a {
+    text-decoration: none;
+}
+.form-horizontal .btn-secondary{
+    background-color: #008ff4;
 }
 @media only screen and (max-width: 479px){
     .form-horizontal .form-group{

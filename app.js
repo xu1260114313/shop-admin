@@ -27,7 +27,7 @@ app.use("/upload", express.static(__dirname + "/upload"));
 //自定义中间件，判断登陆状态
 app.use((req, res, next) => {
     
-    if(req.url === "/login" || req.url === "/doLogin") {
+    if(req.url === "/login" || req.url === "/doLogin" || req.url === "/register" || req.url === "/doRegister") {
         next();
     }else {
         const { userInfo } = req.session;
@@ -40,11 +40,15 @@ app.use((req, res, next) => {
     }
 })
 routes(app, DB);
-app.listen(3000, err => {
+
+// module.exports = app;
+
+const PORT =  process.env.PORT || 3000;
+
+app.listen(PORT, err => {
     if(err) {
         console.log(err);
         return;
     }
-    console.log(`Server name: http://localhost:3000`);
+    console.log(`Server name: http://localhost:${PORT}`);
 });
-
